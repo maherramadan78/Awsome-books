@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <style>
+    .warning {
+        background: rgb(255, 232, 232);
+    }
+  </style>  
+</head>
+<body>
+<div class="container">
+<header class="mt-3 text-center">
+    <h1 id="heading">Book List APP</h1>
+
+</header>
+
+
+
+
+<!--Input section -->
+<section>
+<form>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="title" class="form-control" id="book-name" />
+      </div>
+
+      <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="author" class="form-control" id="author-name" />
+        </div>
+    <div class="text-center">
+    <button type="submit" class="btn btn-success col-6">Submit</button>
+</div>
+</form>
+</section>
+
+
+<!-- book list section-->
+<section class="mt-3">
+    <h2 class="text-center">Book List</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+      </tr>
+    </thead>
+   
+
+    <tbody id="book-list">
+        <!-- book lista data -->
+    </tbody>
+   </table>
+   <div class="btn-delete">
+    <button type="button" class="btn btn-delette">Remove</button>
+   </div>
+</section>
+</div>
+
+    <script src="app.js"></script>
+
+    
+     </body>
+        
+ </html>
