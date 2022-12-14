@@ -1,32 +1,32 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .book {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 hr {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-input {
-    margin-bottom: 20px;
-    width: 200px;
-    text-indent: 5px;
+  margin-bottom: 20px;
+  width: 200px;
+  text-indent: 5px;
 }
 
 .book,
 form {
-    width: 300px;
+  width: 300px;
 }
 
 .remove-button,
