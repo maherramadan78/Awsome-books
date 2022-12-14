@@ -1,77 +1,55 @@
-// Elements Selecting
-const book = document.querySelector("#book-name");
-const author = document.querySelector("#author-name");
-const submit = document.querySelector(".btn");
-const list = document.querySelector("#book-list");
+const form = document.querySelector('.book-form');
+const booksContainer = document.querySelector('.books-container');
+const title = form[0];
+const author = form[1];
 
+const addBook = () => {
+    if(title.value || author.value) {
+    const book = {
+      id: new Date().getTime().toString(),
+      title: title.value, 
+      author: author.value
+    };
+    let books = JSON.parse(localStorage.getItem('books')) || [];
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
+    return books;
+    };
+    return 'Transaction Completed'
+}
 
+const removeBook = (id) => {
+  let books = JSON.parse(localStorage.getItem('books')) || [];
+  const newBooks = [...books.filter(book => book.id.toString() !== id.toString())];
+  localStorage.setItem('books', JSON.stringify(newBooks));
+  return newBooks;
+};
 
-// Add Event listener
-submit.addEventListener('click', function(e) {
-     e.preventDefault(); // keep changed;
-     if(book.value == '' && author.value == '') {
-      
-        // warning class added
-        book.classList.add('warning');
-        author.classList.add('warning');
+const renderBooks = () => {
+  let localBooks = JSON.parse(localStorage.getItem('books')) || [];
+  booksContainer.innerHTML = '';
+  localBooks.forEach(book => {
+    booksContainer.innerHTML += `
+    <li class="book">
+    <span>${book.title}</span>
+    <span>${book.author}</span>
+    <button type="button" id=${book.id} class="remove-button">Remove</button>
+    <hr>
+    </li>`
+  })
+};
 
-        book.setAttribute("placeholder","write a book name.")
-        author.setAttribute("placeholder","write an author name.")
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  addBook();
+  form.reset();
+  renderBooks();
+});
 
-        // remove warning text & class
-        function removeWarning() {
-            book.classList.remove('warning');
-            author.classList.remove('warning');
-            book.setAttribute("placeholder","")
-            author.setAttribute("placeholder","")
-        }
-         setTimeout(removeWarning, 1024)
-
-
-    } else if (book.value == '') {
-        // For individual warning
-        book.classList.add('warning');
-        book.setAttribute("placeholder","write a book name.")
-
-        function removeNameWarning() {
-        book.classList.remove('warning');
-        book.setAttribute("placeholder", "")
-         }
-         setTimeout(removeNameWarning, 1024);
-         } else if (author.value == '') {
-
-             // For individual warning
-             author.classList.add('warning');
-             author.setAttribute("placeholder","write an author name.");
-
-             function removeAuthorWarning() {
-                author.classList.remove('warning');
-                author.setAttribute("placeholder", "")
-             }
-             setTimeout(removeAutorWarning, 1024);
-
-              
-         } else  {
-        // row creation & register
-        const newRow = document.createElement('tr');
-        list.appendChild(newRow);
-
-        // new book column creation & take input
-        const newBookColumn = document.createElement('th');
-        newRow.appendChild(newBookColumn);
-        newBookColumn.innerText = book.value;
-
-        // new book column creation & take input
-        const newAuthorColumn = document.createElement('th');
-        newRow.appendChild(newAuthorColumn);
-        newAuthorColumn.innerText = author.value;
-
-    }    
-    
-    // blink all the box after input taken.
-    book.value = '';
-    author.value = '';
-
-
+booksContainer.addEventListener('click', (e) => {
+  const {target} = e;
+  removeBook(target.id)
+  renderBooks();
 })
 
+window.onload = renderBooks();
