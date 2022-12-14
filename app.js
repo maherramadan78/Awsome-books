@@ -4,39 +4,39 @@ const title = form[0];
 const author = form[1];
 
 const addBook = () => {
-    if(title.value || author.value) {
+  if (title.value || author.value) {
     const book = {
       id: new Date().getTime().toString(),
-      title: title.value, 
-      author: author.value
+      title: title.value,
+      author: author.value,
     };
-    let books = JSON.parse(localStorage.getItem('books')) || [];
+    const books = JSON.parse(localStorage.getItem('books')) || [];
     books.push(book);
     localStorage.setItem('books', JSON.stringify(books));
     return books;
-    };
-    return 'Transaction Completed'
-}
+  }
+  return 'Transaction Completed';
+};
 
 const removeBook = (id) => {
-  let books = JSON.parse(localStorage.getItem('books')) || [];
-  const newBooks = [...books.filter(book => book.id.toString() !== id.toString())];
+  const books = JSON.parse(localStorage.getItem('books')) || [];
+  const newBooks = [...books.filter((book) => book.id.toString() !== id.toString())];
   localStorage.setItem('books', JSON.stringify(newBooks));
   return newBooks;
 };
 
 const renderBooks = () => {
-  let localBooks = JSON.parse(localStorage.getItem('books')) || [];
+  const localBooks = JSON.parse(localStorage.getItem('books')) || [];
   booksContainer.innerHTML = '';
-  localBooks.forEach(book => {
+  localBooks.forEach((book) => {
     booksContainer.innerHTML += `
     <li class="book">
     <span>${book.title}</span>
     <span>${book.author}</span>
     <button type="button" id=${book.id} class="remove-button">Remove</button>
     <hr>
-    </li>`
-  })
+    </li>`;
+  });
 };
 
 form.addEventListener('submit', (e) => {
@@ -47,9 +47,9 @@ form.addEventListener('submit', (e) => {
 });
 
 booksContainer.addEventListener('click', (e) => {
-  const {target} = e;
-  removeBook(target.id)
+  const { target } = e;
+  removeBook(target.id);
   renderBooks();
-})
+});
 
 window.onload = renderBooks();
