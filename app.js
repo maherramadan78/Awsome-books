@@ -3,53 +3,60 @@ const booksContainer = document.querySelector('.books-container');
 const title = form[0];
 const author = form[1];
 
-const addBook = () => {
-  if (title.value || author.value) {
-    const book = {
-      id: new Date().getTime().toString(),
-      title: title.value,
-      author: author.value,
-    };
-    const books = JSON.parse(localStorage.getItem('books')) || [];
-    books.push(book);
-    localStorage.setItem('books', JSON.stringify(books));
-    return books;
+class Book {
+  constructor() {
+    this.books = JSON.parse(localStorage.getItem('books')) || [];
   }
-  return 'Transaction Completed';
-};
 
-const removeBook = (id) => {
-  const books = JSON.parse(localStorage.getItem('books')) || [];
-  const newBooks = [...books.filter((book) => book.id.toString() !== id.toString())];
-  localStorage.setItem('books', JSON.stringify(newBooks));
-  return newBooks;
-};
+  addBook = () => {
+    if (title.value || author.value) {
+      const book = {
+        id: new Date().getTime().toString(),
+        title: title.value,
+        author: author.value,
+      };
+      this.books.push(book);
+      localStorage.setItem('books', JSON.stringify(this.books));
+      return this.books;
+    }
+    return 'Transaction Completed';
+  };
 
-const renderBooks = () => {
-  const localBooks = JSON.parse(localStorage.getItem('books')) || [];
-  booksContainer.innerHTML = '';
-  localBooks.forEach((book) => {
-    booksContainer.innerHTML += `
+  removeBook = (id) => {
+    const books = this.books.filter((book) => book.id.toString() !== id.toString());
+    this.books = books;
+    localStorage.setItem('books', JSON.stringify(this.books));
+    return books;
+  };
+
+  renderBooks = () => {
+    booksContainer.innerHTML = '';
+    this.books.forEach((book) => {
+      booksContainer.innerHTML += `
     <li class="book">
     <span>${book.title}</span>
+    <span>by</span>
     <span>${book.author}</span>
     <button type="button" id=${book.id} class="remove-button">Remove</button>
     <hr>
     </li>`;
-  });
-};
+    });
+  };
+}
+
+const books = new Book();
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  addBook();
+  books.addBook();
   form.reset();
-  renderBooks();
+  books.renderBooks();
 });
 
 booksContainer.addEventListener('click', (e) => {
   const { target } = e;
-  removeBook(target.id);
-  renderBooks();
+  books.removeBook(target.id);
+  books.renderBooks();
 });
 
-window.onload = renderBooks();
+window.onload = books.renderBooks();
