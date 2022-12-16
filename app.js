@@ -1,8 +1,8 @@
 const libraryBooksEl = document.querySelector('.library-books');
-const addEBtn = document.querySelector('.library-btn__add');
-const titleE = document.getElementById('title');
-const authorE = document.getElementById('author');
-const errMsgE = document.querySelector('.errMsg');
+const addElBtn = document.querySelector('.library-btn__add');
+const titleEl = document.getElementById('title');
+const authorEl = document.getElementById('author');
+const errMsgEl = document.querySelector('.errMsg');
 const form = document.querySelector('form');
 const bookList = JSON.parse(localStorage.getItem('bookList')) || [];
 class Library {
@@ -10,11 +10,10 @@ class Library {
     this.title = title;
     this.author = author;
   }
-
-  addBooks() {
-    addEBtn.addEventListener('click', () => {
-      const title = titleE.value;
-      const author = authorE.value;
+  addBook() {
+    addElBtn.addEventListener('click', () => {
+      const title = titleEl.value;
+      const author = authorEl.value;
       if (title && author) {
         const newBook = {
           title,
@@ -24,13 +23,12 @@ class Library {
         localStorage.setItem('bookList', JSON.stringify(bookList));
         this.renderBooks();
         form.reset();
-        errMsgE.innerHTML = '';
+        errMsgEl.innerHTML = '';
       } else {
-        errMsgE.innerHTML = 'Input something';
+        errMsgEl.innerHTML = 'Input something';
       }
     });
   }
-
   renderBooks() {
     if (!bookList.length) {
       libraryBooksEl.innerHTML = 'No books added';
@@ -59,5 +57,5 @@ class Library {
   }
 }
 const awesomeBooks = new Library();
-awesomeBooks.addBooks();
+awesomeBooks.addBook();
 awesomeBooks.renderBooks();
