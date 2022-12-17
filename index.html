@@ -1,24 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <title>Book List</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
 </head>
 <body>
-    <h1 id="heading">Awesome Books</h1>
-    <ul class="books-container">
-
+  <nav class="nav-bar">
+    <h3>Awsome Books</h3>
+    <ul class="nav-list">
+      <li><a href="#" id="bookList">Book List</a></li>
+      <li><a href="#" id="addBook">Add a book</a></li>
+      <li><a href="#" id="contact">Contact</a></li>
     </ul>
-    <form class="book-form">
-      <input type="text" class="form-input" placeholder="Title">
-      <input type="text" class="form-input" placeholder="Author">
-      <button type="submit" class="submit-button">Add</button>
-    </form>
-
-    <script src="app.js"></script>
-    </body>
-        
- </html>
+  </nav>
+  <div class="bigcontainer">
+    <div class="containerSection">
+      <section id="booklistSection" class="noShow">
+        <h2>Welcome to Library Section</h2>
+        <div class="library">
+        </div>
+      </section>
+      <section id="main-screen">
+        <div class="main-screen">
+          <h2>Welcome Bookie!</h2>
+          <form id="form-container">
+            <input type="text" class="title" id="bookTitle" placeholder="Title" name="formTitle">
+            <input type="text" class="author" id="bookAuthor" placeholder="Author" name="formAuthor">
+            <div class="containerbutton">
+              <button type="submit" class="add-button">Submit</button>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section id="contact-section">
+        <div class="contact-container">
+          <h2>Contact Information</h2>
+          <p>Do you have any question? or you just want to say 'Hello'?</p>
+          <div class="info-container">
+            <div class="Ginfo">
+              <h3>Github: @Gdiazdiaz</h3>
+              <h3>Email: glendadiazah6@outlook.com</h3>
+            </div>
+            <div class="Dinfo">
+              <h3>Github: @dgcuenca</h3>
+              <h3>Email: web3.0develope@gmail.com</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer>
+      <p>Copyright: 2022-2025 AwsomeBook's. All Rights Reserved </p>
+    </footer>
+  </div>
+  <script src="JS/script.js"></script>
+  <script src="JS/navbar.js"></script>
+</body>
