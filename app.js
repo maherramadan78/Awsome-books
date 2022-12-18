@@ -4,6 +4,10 @@ const titleE = document.getElementById('title');
 const authorE = document.getElementById('author');
 const errMsgE = document.querySelector('.errMsg');
 const form = document.querySelector('form');
+const contactSection = document.querySelector('.contact');
+const booksListLink = document.querySelector('#books-list');
+const formLink = document.querySelector('#books-form');
+const contactLink = document.querySelector('#books-contact');
 const bookList = JSON.parse(localStorage.getItem('bookList')) || [];
 class Library {
   constructor(title, author) {
@@ -61,3 +65,21 @@ class Library {
 const awesomeBooks = new Library();
 awesomeBooks.addBooks();
 awesomeBooks.renderBooks();
+
+booksListLink.addEventListener('click', () => {
+  form.style.display = 'none';
+  libraryBooksEl.style.display = 'inherit';
+  contactSection.style.display = 'none';
+});
+
+formLink.addEventListener('click', () => {
+  form.style.display = 'inherit';
+  libraryBooksEl.style.display = 'none';
+  contactSection.style.display = 'none';
+});
+
+contactLink.addEventListener('click', () => {
+  form.style.display = 'none';
+  libraryBooksEl.style.display = 'none';
+  contactSection.style.display = 'flex';
+});
