@@ -7,13 +7,26 @@
     <title>Awesome books</title>
     <link rel="stylesheet" href="./style.css" />
     <link rel="icon" type="image/x-icon" href="/Images/books.png" />
+    <script src="./app.js" defer></script>
   </head>
   <body>
+    <header>
+      <h2>Awesome Books</h2>
+      <nav>
+        <ul class="nav-links-container">
+          <li class="nav-link"><a class="nav-link" href="#" id="books-list">List</a></li>
+          <li class="nav-link">|</li>
+          <li class="nav-link"><a class="nav-link" href="#" id="books-form">Add New</a></li>
+          <li class="nav-link">|</li>
+          <li class="nav-link"><a class="nav-link" href="#" id="books-contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
     <main>
       <h1 class="library-heading">All awesome books</h1>
       <section class="library-books border-black">
       </section>
-      <form action="">
+      <form id="book-form">
                 <h2>A<span>dd a new </span>book</h2>
         <input type="text" id="title" placeholder="Title" class="border-black" required />
         <br />
@@ -23,6 +36,22 @@
                 <p class="errMsg"></p>
       </form>
     </main>
-    <script src="app.js"></script>
+      <section class="contact">
+        <h2 class="contact-header">
+          Contact Information
+        </h2>
+        <p class="contact-paragraph">
+          Do you have any questions or do you want to just say Hello!?<br>
+          You can reach out to me on these links.
+        </p>
+        <ul class="contact-links">
+          <li>- Our email: 123@mail.com</li>
+          <li>- Our Phone No: 12345789</li>
+          <li>- Our Address: Mexico City</li>
+        </ul>
+      </section>
+      <footer class="footer">
+        <h2>Copyright</h2>
+      </footer>
   </body>
 </html>

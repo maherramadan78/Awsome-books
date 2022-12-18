@@ -18,6 +18,32 @@ html {
   overflow-x: hidden;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+header,
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.nav-links-container {
+  display: flex;
+}
+
+.nav-link {
+  list-style: none;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -46,10 +72,6 @@ html {
   text-transform: capitalize;
 }
 
-form button {
-  float: right;
-}
-
 .library-book .library-btn__rmv,
 form button {
   padding: 0.1rem 0.3rem;
@@ -64,6 +86,7 @@ form {
   width: 50vw;
   margin: 0 auto;
   margin-top: 2.2rem;
+  display: none;
 }
 
 form > * {
@@ -90,4 +113,19 @@ form h2 span {
 
 .border-black {
   border: 2.5px solid black;
+}
+
+.contact {
+  display: none;
+}
+
+.contact-links {
+  display: flex;
+}
+
+.contact,
+.contact-links {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
