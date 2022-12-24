@@ -1,6 +1,6 @@
 import * as FN from './modules/functions.js';
 import { Book, bookList, bookListSection } from './modules/classes.js';
-import { DateTime } from './modules/luxon/build/es6/luxon.js';
+import { DateTime } from './modules/luxon.js';
 
 const currentDateTime = document.querySelector('.date-time');
 const now = DateTime.now().toLocaleString(DateTime.DATETIME_MED);
