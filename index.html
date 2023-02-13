@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awesome books</title>
-
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="icon" type="image/x-icon" href="/Images/books.png" />
-    <script src="./app.js" defer></script>
-  </head>
-  <body>
-    <header>
-      <h2 class="heading2">Awesome Books</h2>
-      <nav>
-        <ul class="nav-links-container">
-          <li class="nav-link"><a class="nav-link" href="#" id="books-list">List</a></li>
-          <li class="nav-link">|</li>
-          <li class="nav-link"><a class="nav-link" href="#" id="books-form">Add New</a></li>
-          <li class="nav-link">|</li>
-          <li class="nav-link"><a class="nav-link" href="#" id="books-contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <h1 class="library-heading">All awesome books</h1>
-      <section class="library-books border-black">
-      </section>
-      <form id="book-form">
-                <h2>A<span>dd a new </span>book</h2>
-        <input type="text" id="title" placeholder="Title" class="border-black" required />
-        <br />
-        <input type="text" id="author" placeholder="Author" class="border-black" required />
-                <br>
-        <button src="#" type="button" class="library-btn__add">Add</button>
-                <p class="errMsg"></p>
-      </form>
-    </main>
-      <section class="contact">
-        <h2 class="contact-header">
-          Contact Information
-        </h2>
-        <p class="contact-paragraph">
-          Do you have any questions or do you want to just say Hello!?<br>
-          You can reach out to me on these links.
-        </p>
-        <ul class="contact-links">
-          <li>- Our email: maherramadan2012@mail.com</li>
-          <li>- Our Phone No: 12345789</li>
-          <li>- Our Address: Mexico City</li>
-        </ul>
-      </section>
-      <footer class="footer">
-        <h2>Copyright Maher Ramadan</h2>
-      </footer>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Books - Library</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="library-title">
+    <h1 class="title-text">Awesome books</h1>
+  </div>
+  <div class="library-wrapper">
+  </div>
+  <div class="form-add-wrapper">
+    <form class="form-add">
+      <div class="add-title">
+        <input 
+        type="text"
+        placeholder="Title"
+        class="add-title-input">
+      </div>
+      <div class="add-author">
+        <input 
+        type="text"
+        placeholder="Author"
+        class="add-author-input">
+      </div>
+      <button class="add-book-btn">Add</button>
+    </form>
+  </div>
+<script src="app.js"></script>
+</body>
 </html>

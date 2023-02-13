@@ -1,85 +1,76 @@
-const libraryBooksEl = document.querySelector('.library-books');
-const addEBtn = document.querySelector('.library-btn__add');
-const titleE = document.getElementById('title');
-const authorE = document.getElementById('author');
-const errMsgE = document.querySelector('.errMsg');
-const form = document.querySelector('form');
-const contactSection = document.querySelector('.contact');
-const booksListLink = document.querySelector('#books-list');
-const formLink = document.querySelector('#books-form');
-const contactLink = document.querySelector('#books-contact');
-const bookList = JSON.parse(localStorage.getItem('bookList')) || [];
-class Library {
-  constructor(title, author) {
-    this.title = title;
-    this.author = author;
-  }
+const addBtn = document.querySelector('.add-book-btn');
+const newTitleInput = document.querySelector('.add-title-input');
+const newAuthorInput = document.querySelector('.add-author-input');
+const libraryContainer = document.querySelector('.library-wrapper');
 
-  addBooks() {
-    addEBtn.addEventListener('click', () => {
-      const title = titleE.value;
-      const author = authorE.value;
-      if (title && author) {
-        const newBook = {
-          title,
-          author,
-        };
-        bookList.push(newBook);
-        localStorage.setItem('bookList', JSON.stringify(bookList));
-        this.renderBooks();
-        form.reset();
-        errMsgE.innerHTML = '';
-      } else {
-        errMsgE.innerHTML = 'Input something';
-      }
-    });
-  }
+const store = JSON.parse(localStorage.getItem('book'));
 
-  renderBooks() {
-    if (!bookList.length) {
-      libraryBooksEl.innerHTML = 'No books added';
-    } else {
-      let markup = '';
-      bookList.forEach((elem, index) => {
-        markup += `<div class="library-book" style="background-color: ${index % 2 && 'rgb(225, 223, 223)'}">
-        <p class="library-book__title">"${elem.title}"</p> <span> by </span>
-        <p class="library-book__author">${elem.author}</p>
-        <button type="button" class="library-btn__rmv" id=${index}>Remove</button>
-    </div>`;
-      });
-      libraryBooksEl.innerHTML = markup;
-    }
-    const removeBook = () => {
-      const removeBtnsEl = [...document.getElementsByClassName('library-btn__rmv')];
-      removeBtnsEl.forEach((item) => {
-        item.addEventListener('click', (e) => {
-          bookList.splice(e.target.id, 1);
-          localStorage.setItem('bookList', JSON.stringify(bookList));
-          this.renderBooks();
-        });
-      });
-    };
-    removeBook();
-  }
+let library = store || [];
+
+// Display book from local storage
+
+for (let i = 0; i < library.length; i += 1) {
+  const html = `
+    <div>
+      <p class="book-position">${library[i].title}</p>
+      <p class="book-title">${library[i].author}</p>
+      <button id="${library[i].id}" class="remove-btn">Remove</button>
+      <div class="line-bottom"></div>
+    </div>
+  `;
+  libraryContainer.innerHTML += html;
 }
-const awesomeBooks = new Library();
-awesomeBooks.addBooks();
-awesomeBooks.renderBooks();
+// display new book
 
-booksListLink.addEventListener('click', () => {
-  form.style.display = 'none';
-  libraryBooksEl.style.display = 'inherit';
-  contactSection.style.display = 'none';
-});
+const displayBook = function (newBook) {
+  const html = ` <div class="book-wrapper">
+  <p class="title-display">${newBook.title}</p>
+  <p class="author-display">${newBook.author}</p>
+  <button class="remove-btn" id="${newBook.newId}">Remove </button>
+  <div class="grey-line"></div>
+</div>`;
+  libraryContainer.innerHTML += html;
+  localStorage.setItem('book', JSON.stringify(library)); // LOCAL STORAGE
+};
 
-formLink.addEventListener('click', () => {
-  form.style.display = 'inherit';
-  libraryBooksEl.style.display = 'none';
-  contactSection.style.display = 'none';
-});
+const Book = function (id, title, author) {
+  this.id = id;
+  this.title = title;
+  this.author = author;
+};
 
-contactLink.addEventListener('click', () => {
-  form.style.display = 'none';
-  libraryBooksEl.style.display = 'none';
-  contactSection.style.display = 'flex';
-});
+// Function to add and display new books.
+
+const addBook = function (e) {
+  e.preventDefault();
+  const newTitle = newTitleInput.value;
+  const newAuthor = newAuthorInput.value;
+  let newId;
+  const len = library.length;
+  if (len === 0 || len === null) {
+    newId = 0;
+  } else {
+    newId = library[len - 1].id + 1;
+  }
+  if (newTitle && newAuthor) {
+    const newBook = new Book(newId, newTitle, newAuthor);
+    library.push(newBook);
+    displayBook(newBook);
+  }
+};
+
+// Function to remove new Book
+
+const removeBook = function (e) {
+  if (e.target.classList.contains('remove-btn')) {
+    const { id } = e.target;
+    library = library.filter((bk) => JSON.stringify(bk.id) !== id);
+    localStorage.setItem('book', JSON.stringify(library)); // LOCAL STORAGE
+    e.target.parentElement.remove();
+  }
+};
+
+// Event Listeners
+
+addBtn.addEventListener('click', addBook);
+libraryContainer.addEventListener('click', removeBook);

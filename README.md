@@ -199,11 +199,12 @@ Example:
 
 > Mention all of the collaborators of this project.
 
-👤 **Shoaib Qureshi**
+👤 **Alejandro Bernal Marin**
 
-- GitHub: [@githubhandle](https://github.com/shobeee)
-- Twitter: [@twitterhandle](https://twitter.com/xfitness_x)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/m/in/xfitness-x-784212244)
+- GitHub: [@githubhandle](https://github.com/Alejandro-Bernal-M)
+
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/alejandro-bernal-marin-901a53245//)
+- Twitter: [Twitter](https://twitter.com/ABMblau)
 
 👤 **Maher Ramadan**
 
