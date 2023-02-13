@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awesome books</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/x-icon" href="/Images/books.png" />
-  </head>
-  <body>
-    <main>
-      <h1 class="library-heading">All awesome books</h1>
-      <section class="library-books border-black">
-      </section>
-      <form action="">
-                <h2>A<span>dd a new </span>book</h2>
-        <input type="text" id="title" placeholder="Title" class="border-black" required />
-        <br />
-        <input type="text" id="author" placeholder="Author" class="border-black" required />
-                <br>
-        <button src="#" type="button" class="library-btn__add">Add</button>
-                <p class="errMsg"></p>
-      </form>
-    </main>
-    <script src="app.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Books - Library</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="library-title">
+    <h1 class="title-text">Awesome books</h1>
+  </div>
+  <div class="library-wrapper">
+  </div>
+  <div class="form-add-wrapper">
+    <form class="form-add">
+      <div class="add-title">
+        <input 
+        type="text"
+        placeholder="Title"
+        class="add-title-input">
+      </div>
+      <div class="add-author">
+        <input 
+        type="text"
+        placeholder="Author"
+        class="add-author-input">
+      </div>
+      <button class="add-book-btn">Add</button>
+    </form>
+  </div>
+<script src="app.js"></script>
+</body>
 </html>

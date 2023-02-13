@@ -1,55 +1,76 @@
-const form = document.querySelector('.book-form');
-const booksContainer = document.querySelector('.books-container');
-const title = form[0];
-const author = form[1];
+const addBtn = document.querySelector('.add-book-btn');
+const newTitleInput = document.querySelector('.add-title-input');
+const newAuthorInput = document.querySelector('.add-author-input');
+const libraryContainer = document.querySelector('.library-wrapper');
 
-const addBook = () => {
-  if (title.value || author.value) {
-    const book = {
-      id: new Date().getTime().toString(),
-      title: title.value,
-      author: author.value,
-    };
-    const books = JSON.parse(localStorage.getItem('books')) || [];
-    books.push(book);
-    localStorage.setItem('books', JSON.stringify(books));
-    return books;
-  }
-  return 'Transaction Completed';
+const store = JSON.parse(localStorage.getItem('book'));
+
+let library = store || [];
+
+// Display book from local storage
+
+for (let i = 0; i < library.length; i += 1) {
+  const html = `
+    <div>
+      <p class="book-position">${library[i].title}</p>
+      <p class="book-title">${library[i].author}</p>
+      <button id="${library[i].id}" class="remove-btn">Remove</button>
+      <div class="line-bottom"></div>
+    </div>
+  `;
+  libraryContainer.innerHTML += html;
+}
+// display new book
+
+const displayBook = function (newBook) {
+  const html = ` <div class="book-wrapper">
+  <p class="title-display">${newBook.title}</p>
+  <p class="author-display">${newBook.author}</p>
+  <button class="remove-btn" id="${newBook.newId}">Remove </button>
+  <div class="grey-line"></div>
+</div>`;
+  libraryContainer.innerHTML += html;
+  localStorage.setItem('book', JSON.stringify(library)); // LOCAL STORAGE
 };
 
-const removeBook = (id) => {
-  const books = JSON.parse(localStorage.getItem('books')) || [];
-  const newBooks = [...books.filter((book) => book.id.toString() !== id.toString())];
-  localStorage.setItem('books', JSON.stringify(newBooks));
-  return newBooks;
+const Book = function (id, title, author) {
+  this.id = id;
+  this.title = title;
+  this.author = author;
 };
 
-const renderBooks = () => {
-  const localBooks = JSON.parse(localStorage.getItem('books')) || [];
-  booksContainer.innerHTML = '';
-  localBooks.forEach((book) => {
-    booksContainer.innerHTML += `
-    <li class="book">
-    <span>${book.title}</span>
-    <span>${book.author}</span>
-    <button type="button" id=${book.id} class="remove-button">Remove</button>
-    <hr>
-    </li>`;
-  });
-};
+// Function to add and display new books.
 
-form.addEventListener('submit', (e) => {
+const addBook = function (e) {
   e.preventDefault();
-  addBook();
-  form.reset();
-  renderBooks();
-});
+  const newTitle = newTitleInput.value;
+  const newAuthor = newAuthorInput.value;
+  let newId;
+  const len = library.length;
+  if (len === 0 || len === null) {
+    newId = 0;
+  } else {
+    newId = library[len - 1].id + 1;
+  }
+  if (newTitle && newAuthor) {
+    const newBook = new Book(newId, newTitle, newAuthor);
+    library.push(newBook);
+    displayBook(newBook);
+  }
+};
 
-booksContainer.addEventListener('click', (e) => {
-  const { target } = e;
-  removeBook(target.id);
-  renderBooks();
-});
+// Function to remove new Book
 
-window.onload = renderBooks();
+const removeBook = function (e) {
+  if (e.target.classList.contains('remove-btn')) {
+    const { id } = e.target;
+    library = library.filter((bk) => JSON.stringify(bk.id) !== id);
+    localStorage.setItem('book', JSON.stringify(library)); // LOCAL STORAGE
+    e.target.parentElement.remove();
+  }
+};
+
+// Event Listeners
+
+addBtn.addEventListener('click', addBook);
+libraryContainer.addEventListener('click', removeBook);

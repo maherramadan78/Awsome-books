@@ -1,35 +1,21 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body {
+  padding-left: 100px;
+  padding-top: 60px;
 }
 
-.book {
+.form-add {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
-hr {
-  margin: 20px 0;
+.add-book-btn {
+  width: 40px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-input {
-  margin-bottom: 20px;
-  width: 200px;
-  text-indent: 5px;
-}
-
-.book,
-form {
-  width: 300px;
-}
-
-.remove-button,
-.submit-button {
-  width: 60px;
+.grey-line {
+  width: 100px;
+  height: 1px;
+  background-color: grey;
+  margin: 20px 0 20px 0;
 }
