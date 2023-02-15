@@ -1,55 +1,85 @@
-const form = document.querySelector('.book-form');
-const booksContainer = document.querySelector('.books-container');
-const title = form[0];
-const author = form[1];
-
-const addBook = () => {
-  if (title.value || author.value) {
-    const book = {
-      id: new Date().getTime().toString(),
-      title: title.value,
-      author: author.value,
-    };
-    const books = JSON.parse(localStorage.getItem('books')) || [];
-    books.push(book);
-    localStorage.setItem('books', JSON.stringify(books));
-    return books;
+const libraryBooksEl = document.querySelector('.library-books');
+const addEBtn = document.querySelector('.library-btn__add');
+const titleE = document.getElementById('title');
+const authorE = document.getElementById('author');
+const errMsgE = document.querySelector('.errMsg');
+const form = document.querySelector('form');
+const contactSection = document.querySelector('.contact');
+const booksListLink = document.querySelector('#books-list');
+const formLink = document.querySelector('#books-form');
+const contactLink = document.querySelector('#books-contact');
+const bookList = JSON.parse(localStorage.getItem('bookList')) || [];
+class Library {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
   }
-  return 'Transaction Completed';
-};
 
-const removeBook = (id) => {
-  const books = JSON.parse(localStorage.getItem('books')) || [];
-  const newBooks = [...books.filter((book) => book.id.toString() !== id.toString())];
-  localStorage.setItem('books', JSON.stringify(newBooks));
-  return newBooks;
-};
+  addBooks() {
+    addEBtn.addEventListener('click', () => {
+      const title = titleE.value;
+      const author = authorE.value;
+      if (title && author) {
+        const newBook = {
+          title,
+          author,
+        };
+        bookList.push(newBook);
+        localStorage.setItem('bookList', JSON.stringify(bookList));
+        this.renderBooks();
+        form.reset();
+        errMsgE.innerHTML = '';
+      } else {
+        errMsgE.innerHTML = 'Input something';
+      }
+    });
+  }
 
-const renderBooks = () => {
-  const localBooks = JSON.parse(localStorage.getItem('books')) || [];
-  booksContainer.innerHTML = '';
-  localBooks.forEach((book) => {
-    booksContainer.innerHTML += `
-    <li class="book">
-    <span>${book.title}</span>
-    <span>${book.author}</span>
-    <button type="button" id=${book.id} class="remove-button">Remove</button>
-    <hr>
-    </li>`;
-  });
-};
+  renderBooks() {
+    if (!bookList.length) {
+      libraryBooksEl.innerHTML = 'No books added';
+    } else {
+      let markup = '';
+      bookList.forEach((elem, index) => {
+        markup += `<div class="library-book" style="background-color: ${index % 2 && 'rgb(225, 223, 223)'}">
+        <p class="library-book__title">"${elem.title}"</p> <span> by </span>
+        <p class="library-book__author">${elem.author}</p>
+        <button type="button" class="library-btn__rmv" id=${index}>Remove</button>
+    </div>`;
+      });
+      libraryBooksEl.innerHTML = markup;
+    }
+    const removeBook = () => {
+      const removeBtnsEl = [...document.getElementsByClassName('library-btn__rmv')];
+      removeBtnsEl.forEach((item) => {
+        item.addEventListener('click', (e) => {
+          bookList.splice(e.target.id, 1);
+          localStorage.setItem('bookList', JSON.stringify(bookList));
+          this.renderBooks();
+        });
+      });
+    };
+    removeBook();
+  }
+}
+const awesomeBooks = new Library();
+awesomeBooks.addBooks();
+awesomeBooks.renderBooks();
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  addBook();
-  form.reset();
-  renderBooks();
+booksListLink.addEventListener('click', () => {
+  form.style.display = 'none';
+  libraryBooksEl.style.display = 'inherit';
+  contactSection.style.display = 'none';
 });
 
-booksContainer.addEventListener('click', (e) => {
-  const { target } = e;
-  removeBook(target.id);
-  renderBooks();
+formLink.addEventListener('click', () => {
+  form.style.display = 'inherit';
+  libraryBooksEl.style.display = 'none';
+  contactSection.style.display = 'none';
 });
 
-window.onload = renderBooks();
+contactLink.addEventListener('click', () => {
+  form.style.display = 'none';
+  libraryBooksEl.style.display = 'none';
+  contactSection.style.display = 'flex';
+});
